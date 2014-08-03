@@ -1,15 +1,25 @@
 ﻿MYAPP.controllers.mainController = (function () {
     var Mark,
+        RecolorSelectedFigure,
         GetColor,
         ClearCanvas,
         SaveToJson,
         LoadFromJson,
         InitializeIt,
-        _shape = MYAPP.models.shape,
-        _mainController = MYAPP.controllers.mainController,
-        _rectangle = MYAPP.models.rectangle,
-        _rectangleView=MYAPP.views.rectangleView;
-
+        selectedToEdit = -1,
+        selectedFigureIndex = -1,
+        _shape,
+        _rectangle,
+        _line,
+        _ellipse,
+        _mainController,
+        _rectangleController,
+        _ellipseController,
+        _lineController,
+        _mainView,
+        _rectangleView,
+        _lineView,
+        _ellipseView;
 
     InitializeIt = function () {
         $(document).ready(function () {
@@ -17,8 +27,19 @@
             context = document.getElementById('canvas').getContext('2d');
             canvasCoordinates = canvas.getBoundingClientRect();
             canvas.width = 720;
-            canvas.height = 390;
-
+            canvas.height = 390,
+            _shape = MYAPP.models.shape,
+            _rectangle = MYAPP.models.rectangle,
+            _line = MYAPP.models.line,
+            _ellipse = MYAPP.models.ellipse,
+            _mainController = MYAPP.controllers.mainController,
+            _rectangleController = MYAPP.controllers.rectangleController,
+            _ellipseController = MYAPP.controllers.ellipseController,
+            _lineController = MYAPP.controllers.lineController,
+            _mainView = MYAPP.views.mainView,
+            _rectangleView = MYAPP.views.rectangleView,
+            _lineView = MYAPP.views.lineView,
+            _ellipseView = MYAPP.views.ellipseView;                     
 
             function Draw() {    //view
                 ClearCanvas();
@@ -26,19 +47,17 @@
 
                     switch (item.Type) {
                         case "Rectangle":
-                            MYAPP.views.rectangleView.draw(item);
+                            _rectangleView.draw(item);
                             break;
-                            //case "Ellipse":
-                            //    var figure = new Ellipse(initialX, initialY, initialX, initialY, GetColor());
-                            //    a.push(figure);
-                            //    break;
-                            //case "Line":
-                            //    var figure = new Line(initialX, initialY, initialX, initialY, GetColor());
-                            //    a.push(figure);
+                        case "Ellipse":
+                            _ellipseView.draw(item);
+                            break;                            
+                        case "Line":
+                            _lineView.draw(ITEM);
+                            break;
                         default:
                             break;
-                    }
-                    //item.draw();
+                    }                    
                 });
             };
 
@@ -46,39 +65,40 @@
 
             canvas.addEventListener("mousedown", function (e) {
                 initialX = e.pageX - canvasCoordinates.left,
-                initialY = e.pageY - canvasCoordinates.top;
+                initialY = e.pageY - canvasCoordinates.top;                
 
                 try {
                     figureType = $('#figure-type > .marked')[0].innerHTML;
+                    selectedToEdit = a.length;
+                    selectedFigureIndex = a.length;
 
                     switch (figureType) {
                         case "Rectangle":
-
-                            var figure = new MYAPP.models.rectangle.Rectangle(initialX, initialY, initialX, initialY, GetColor());
+                            var figure = new _rectangle.Rectangle(initialX, initialY, initialX, initialY, GetColor());
+                            figure.setUniqueNumber();
+                            //alert(MYAPP.utils.guidHelper.guid());
                             a.push(figure);
                             break;
-                            //case "Ellipse":
-                            //    var figure = new Ellipse(initialX, initialY, initialX, initialY, GetColor());
-                            //    a.push(figure);
-                            //    break;
-                            //case "Line":
-                            //    var figure = new Line(initialX, initialY, initialX, initialY, GetColor());
-                            //    a.push(figure);
-
+                        case "Ellipse":
+                            var figure = new _ellipse.Ellipse(initialX, initialY, initialX, initialY, GetColor());
+                            a.push(figure);
+                            break;
+                        case "Line":
+                            var figure = new _line.Line(initialX, initialY, initialX, initialY, GetColor());
+                            a.push(figure);
                         default:
-                            {
-                                break;
-                            }
+                            break;                            
                     }
                 }
-                catch (ex) {
+                catch (ex) {               
+                    selectedToEdit = -1;
+                    selectedFigureIndex = -1;
 
-                    for (var selectionIndex = a.length - 1; selectionIndex >= 0; selectionIndex--) {
-
+                    for (var selectionIndex = a.length - 1; selectionIndex >= 0; selectionIndex--) {                       
                         switch (a[selectionIndex].Type) {
                             case "Rectangle":
+                                //alert(_rectangleController.containsPoint());
                                 if (_rectangleController.containsPoint(a[selectionIndex], initialX, initialY)) {
-
                                     a[selectionIndex].setSelected();
                                     selectedFigureIndex = selectionIndex;
                                     selectedToEdit = selectionIndex;
@@ -87,12 +107,34 @@
                                 else {
                                     a[selectionIndex].resetSelected();
                                 }
-
                                 break;
-                            default:
-                                {
+
+                            case "Ellipse":
+                                if (_ellipseController.containsPoint(a[selectionIndex], initialX, initialY)) {
+                                    a[selectionIndex].setSelected();
+                                    selectedFigureIndex = selectionIndex;
+                                    selectedToEdit = selectionIndex;
                                     break;
                                 }
+                                else {
+                                    a[selectionIndex].resetSelected();
+                                }
+                                break;
+
+                            case "Line":
+                                if (_lineController.containsPoint(a[selectionIndex], initialX, initialY)) {
+                                    a[selectionIndex].setSelected();
+                                    selectedFigureIndex = selectionIndex;
+                                    selectedToEdit = selectionIndex;
+                                    break;
+                                }
+                                else {
+                                    a[selectionIndex].resetSelected();
+                                }
+                                break;
+
+                            default:
+                                break;                               
                         }
                     }
 
@@ -134,18 +176,24 @@
             });
 
             canvas.addEventListener("mouseup", function (e) {
-                var figure = a[a.length - 1];
-                selectedFigureIndex = -1;
-                figureType = undefined;
+                if (figureType) {
+                   // var figure = a[a.length - 1];
+                    selectedToEdit = a.length - 1;
+                    selectedFigureIndex = - 1;
+                    figureType = undefined;
+                }
+                else {
+                    selectedFigureIndex = -1;
+                }
             });
 
 
-            function RecolorSelectedFigure() {
-                if (selectedToEdit > -1) {
-                    var recoloredFigure = a[selectedToEdit];
-                    recoloredFigure.color = GetColor();
-                }
-            }
+            //function RecolorSelectedFigure() {
+            //    if (selectedToEdit > -1) {
+            //        var recoloredFigure = a[selectedToEdit];
+            //        recoloredFigure.color = GetColor();
+            //    }
+            //}
 
             function DeleteSelectedFigure() {
                 if (selectedToEdit > -1) {
@@ -176,6 +224,13 @@
             });
         })
     };
+
+    RecolorSelectedFigure = function() {
+        if (selectedToEdit > -1) {
+            var recoloredFigure = a[selectedToEdit];
+            recoloredFigure.color = GetColor();
+        }
+    }
 
     Mark = function (elem) {
         var parent = elem.parentNode,
@@ -235,6 +290,7 @@
 
     return {
         Mark: Mark,
+        RecolorSelectedFigure:RecolorSelectedFigure,
         GetColor: GetColor,
         ClearCanvas: ClearCanvas,
         SaveToJson: SaveToJson,

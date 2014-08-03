@@ -3,7 +3,7 @@
         mainController:null,
         rectangleController: null,
         lineController: null,
-        ellipseeController: null,
+        ellipseController: null,
     },
     models: {
         shape: null,
@@ -30,5 +30,16 @@ initialY = 0,
 a = [], //array for figures 
 selectedFigureIndex = -1,
 selectedToEdit = -1,
-figureType; //identifies whether the figure must be drown and its type
-
+figureType, //identifies whether the figure must be drown and its type
+_shape = MYAPP.models.shape,
+_rectangle = MYAPP.models.rectangle,
+_line = MYAPP.models.line,
+_ellipse = MYAPP.models.ellipse,
+_mainController = MYAPP.controllers.mainController,
+_rectangleController = MYAPP.controllers.rectangleController,
+_ellipseController = MYAPP.controllers.ellipseController,
+_lineController = MYAPP.controllers.lineController,
+_mainView = MYAPP.views.mainView,
+_rectangleView = MYAPP.views.rectangleView,
+_lineView = MYAPP.views.lineView,
+_ellipseView = MYAPP.views.ellipseView;

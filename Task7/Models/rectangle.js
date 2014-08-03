@@ -1,6 +1,6 @@
 ﻿MYAPP.models.rectangle = (function () {
     var _shape = MYAPP.models.shape,       
-        _rectangle = MYAPP.models.rectangle;
+        _rectangle = MYAPP.models.rectangle;    
 
     var Rectangle = function (x1, y1, x2, y2, color) {
         this.Type = "Rectangle";
@@ -12,10 +12,14 @@
 
         this.isSelected = false;
         this.isFinished = false;
-        this.uniqueNumber;
-    }
+        this.uniqueNumber;        
+    }    
 
     Rectangle.prototype = new _shape.Shape();
+
+    Rectangle.prototype.setUniqueNumber = function () {
+        this.uniqueNumber = MYAPP.utils.guidHelper.guid();        
+    }
 
     return {
         Rectangle: Rectangle

@@ -1,8 +1,11 @@
-﻿MYAPP.controllers.rectangleController = function () {
+﻿MYAPP.controllers.rectangleController = (function () {
     _rectangleController = MYAPP.controllers.rectangleController;
-    
-    MYAPP.controllers.rectangleController.containsPoint = function (rectangle, x, y) {
-        if (!rectangle instanceof _rectangle) {
+
+    var containsPoint;
+
+    containsPoint = function (rectangle, x, y) {
+        
+        if (!rectangle instanceof MYAPP.models.rectangle.Rectangle) {
             return false;
         }
 
@@ -52,6 +55,10 @@
                 return false;
             }
         }
-    }    
-}
+    }
+
+    return {
+        containsPoint: containsPoint
+    }
+}());
 

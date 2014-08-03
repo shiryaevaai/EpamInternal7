@@ -16,3 +16,9 @@ C:\Users\User\Desktop\Task7\Task7\bin\Task7.pdb
 C:\Users\User\Desktop\Task7\Task7\obj\Debug\Task7.csprojResolveAssemblyReference.cache
 C:\Users\User\Desktop\Task7\Task7\obj\Debug\Task7.dll
 C:\Users\User\Desktop\Task7\Task7\obj\Debug\Task7.pdb
+C:\Users\User\Documents\Visual Studio 2013\Projects\Task7\Task7\bin\Task7.dll.config
+C:\Users\User\Documents\Visual Studio 2013\Projects\Task7\Task7\bin\Task7.dll
+C:\Users\User\Documents\Visual Studio 2013\Projects\Task7\Task7\bin\Task7.pdb
+C:\Users\User\Documents\Visual Studio 2013\Projects\Task7\Task7\obj\Debug\Task7.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\Visual Studio 2013\Projects\Task7\Task7\obj\Debug\Task7.dll
+C:\Users\User\Documents\Visual Studio 2013\Projects\Task7\Task7\obj\Debug\Task7.pdb
