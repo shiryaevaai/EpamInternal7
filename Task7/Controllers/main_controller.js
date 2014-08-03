@@ -75,13 +75,13 @@
                     switch (figureType) {
                         case "Rectangle":
                             var figure = new _rectangle.Rectangle(initialX, initialY, initialX, initialY, GetColor());
-                            figure.setUniqueNumber();
-                            //alert(MYAPP.utils.guidHelper.guid());
+                            figure.setUniqueNumber();                            
                             a.push(figure);
                             break;
                         case "Ellipse":
                             var figure = new _ellipse.Ellipse(initialX, initialY, initialX, initialY, GetColor());
                             a.push(figure);
+                            figure.setUniqueNumber();
                             break;
                         case "Line":
                             var figure = new _line.Line(initialX, initialY, initialX, initialY, GetColor());
@@ -195,18 +195,18 @@
             //    }
             //}
 
-            function DeleteSelectedFigure() {
-                if (selectedToEdit > -1) {
+            //function DeleteSelectedFigure() {
+            //    if (selectedToEdit > -1) {
 
-                    if (selectedToEdit < a.length - 1) {
-                        for (var k = selectedToEdit; k < a.length - 1; k++) {
-                            a[k] = a[k + 1];
-                        }
-                    }
+            //        if (selectedToEdit < a.length - 1) {
+            //            for (var k = selectedToEdit; k < a.length - 1; k++) {
+            //                a[k] = a[k + 1];
+            //            }
+            //        }
 
-                    a.length--;
-                }
-            }
+            //        a.length--;
+            //    }
+            //}
 
             $(document).keyup(function (eventObject) {
                 if (eventObject.which == 46) {
@@ -219,6 +219,8 @@
                         }
 
                         a.length--;
+                        selectedFigureIndex = -1;
+                        selectedToEdit = -1;
                     }
                 }
             });
