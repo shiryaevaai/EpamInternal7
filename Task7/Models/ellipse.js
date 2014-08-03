@@ -8,10 +8,14 @@
         this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
-        this.color = color;
+        if (color === "") {
+            this.color = "black";
+        }
+        else {
+            this.color = color;
+        }
 
-        this.isSelected = false;
-        this.isFinished = false;
+        this.isSelected = true;      
         this.uniqueNumber;
     }
 

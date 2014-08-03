@@ -18,6 +18,18 @@
                 context.strokeStyle = "#222222";
             }
 
+            if (ellipse.isSelected) {
+                context.shadowOffsetX = 5;
+                context.shadowOffsetY = 5;
+                context.shadowBlur = 4;
+                context.shadowColor = 'black';
+            }
+            else {
+                context.shadowOffsetX = 0;
+                context.shadowOffsetY = 0;
+                context.shadowBlur = 0;
+                context.shadowColor = 'white';
+            }
             context.save();
             context.beginPath();
             context.translate(centerX, centerY);

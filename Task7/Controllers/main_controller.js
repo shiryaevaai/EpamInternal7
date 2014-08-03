@@ -53,7 +53,7 @@
                             _ellipseView.draw(item);
                             break;                            
                         case "Line":
-                            _lineView.draw(ITEM);
+                            _lineView.draw(item);
                             break;
                         default:
                             break;
@@ -71,6 +71,10 @@
                     figureType = $('#figure-type > .marked')[0].innerHTML;
                     selectedToEdit = a.length;
                     selectedFigureIndex = a.length;
+
+                    a.forEach(function (item, index) {
+                        item.resetSelected();
+                    });
 
                     switch (figureType) {
                         case "Rectangle":
