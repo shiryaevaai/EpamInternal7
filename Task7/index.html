@@ -15,13 +15,18 @@
             <div class="select-figure">
                 <label for="figure-type">Select type of figure:</label>
                 <ul id="figure-type">
-                    <li onclick="MYAPP.controllers.mainController.Mark(this)">Line</li>
+                    <!--<li onclick="MYAPP.controllers.mainController.Mark(this)">Line</li>
                     <li onclick="MYAPP.controllers.mainController.Mark(this)">Ellipse</li>
-                    <li onclick="MYAPP.controllers.mainController.Mark(this)">Rectangle</li>
+                    <li onclick="MYAPP.controllers.mainController.Mark(this)">Rectangle</li>-->
 
                     <!--<li onclick="Mark(this)">Line</li>
                     <li onclick="Mark(this)">Ellipse</li>
                     <li onclick="Mark(this)">Rectangle</li>-->
+
+                    <li class="figure-type">Line</li>
+                    <li class="figure-type">Ellipse</li>
+                    <li class="figure-type">Rectangle</li>
+
                 </ul>
             </div>
 
@@ -31,8 +36,7 @@
             </div>
 
             <div class="recolor draw">
-                <!--<button name="recolor-button" class="option-button recolor-button" onclick="RecolorSelectedFigure()">Recolor</button>-->
-                <button name="recolor-button" class="option-button recolor-button" onclick="MYAPP.controllers.mainController.RecolorSelectedFigure()">Recolor</button>
+                <button id="recolor-button" name="recolor-button" class="option-button recolor-button">Recolor</button>
             </div>
 
             <!--<div class="delete-figure">

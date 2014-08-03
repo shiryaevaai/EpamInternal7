@@ -228,40 +228,102 @@
                     }
                 }
             });
+            
+            document.getElementById('recolor-button').onclick = function () {                    
+                if (selectedToEdit > -1) {
+                    var recoloredFigure = a[selectedToEdit];
+                    recoloredFigure.color = GetColor();
+                }
+            }
+          
+            canvas.addEventListener(document.getElementsByClassName('figure-type').onclick, function (event) {
+                var parent = event.target.parentNode,
+                   elem = event.target,
+                   siblings = parent.children,
+                   sibIndex;
+
+
+                if (elem.className == null) {
+                    for (sibIndex = 0; sibIndex < siblings.length; sibIndex++) {
+                        siblings[sibIndex].className = siblings[sibIndex].className.replace(/(?:^|\s)marked(?!\S)/, '');
+                    }
+
+                    elem.className = "marked";
+                }
+                else
+                    if (elem.className.indexOf("marked") === -1) {
+                        for (sibIndex = 0; sibIndex < siblings.length; sibIndex++) {
+                            siblings[sibIndex].className = siblings[sibIndex].className.replace(/(?:^|\s)marked(?!\S)/, '');
+                        }
+
+                        elem.className += " marked";
+                    }
+                    else {
+                        elem.className = elem.className.replace(/(?:^|\s)marked(?!\S)/, '');
+                    }
+            });
+
+            //document.getElementsByClassName('figure-type').onclick (function (event) {
+            //    var parent = event.target.parentNode,
+            //        elem = event.target,
+            //        siblings = parent.children,
+            //        sibIndex;
+                               
+
+            //    if (elem.className == null) {
+            //        for (sibIndex = 0; sibIndex < siblings.length; sibIndex++) {
+            //            siblings[sibIndex].className = siblings[sibIndex].className.replace(/(?:^|\s)marked(?!\S)/, '');
+            //        }
+
+            //        elem.className = "marked";
+            //    }
+            //    else
+            //        if (elem.className.indexOf("marked") === -1) {
+            //            for (sibIndex = 0; sibIndex < siblings.length; sibIndex++) {
+            //                siblings[sibIndex].className = siblings[sibIndex].className.replace(/(?:^|\s)marked(?!\S)/, '');
+            //            }
+
+            //            elem.className += " marked";
+            //        }
+            //        else {
+            //            elem.className = elem.className.replace(/(?:^|\s)marked(?!\S)/, '');
+            //        }
+            //});
+
         })
     };
 
-    RecolorSelectedFigure = function() {
-        if (selectedToEdit > -1) {
-            var recoloredFigure = a[selectedToEdit];
-            recoloredFigure.color = GetColor();
-        }
-    }
+    //RecolorSelectedFigure = function() {
+    //    if (selectedToEdit > -1) {
+    //        var recoloredFigure = a[selectedToEdit];
+    //        recoloredFigure.color = GetColor();
+    //    }
+    //}
 
-    Mark = function (elem) {
-        var parent = elem.parentNode,
-            siblings = parent.children,
-            sibIndex;
+    //Mark = function (elem) {
+    //    var parent = elem.parentNode,
+    //        siblings = parent.children,
+    //        sibIndex;
 
-        if (elem.className == null) {
-            for (sibIndex = 0; sibIndex < siblings.length; sibIndex++) {
-                siblings[sibIndex].className = siblings[sibIndex].className.replace(/(?:^|\s)marked(?!\S)/, '');
-            }
+    //    if (elem.className == null) {
+    //        for (sibIndex = 0; sibIndex < siblings.length; sibIndex++) {
+    //            siblings[sibIndex].className = siblings[sibIndex].className.replace(/(?:^|\s)marked(?!\S)/, '');
+    //        }
 
-            elem.className = "marked";
-        }
-        else
-            if (elem.className.indexOf("marked") === -1) {
-                for (sibIndex = 0; sibIndex < siblings.length; sibIndex++) {
-                    siblings[sibIndex].className = siblings[sibIndex].className.replace(/(?:^|\s)marked(?!\S)/, '');
-                }
+    //        elem.className = "marked";
+    //    }
+    //    else
+    //        if (elem.className.indexOf("marked") === -1) {
+    //            for (sibIndex = 0; sibIndex < siblings.length; sibIndex++) {
+    //                siblings[sibIndex].className = siblings[sibIndex].className.replace(/(?:^|\s)marked(?!\S)/, '');
+    //            }
 
-                elem.className += " marked";
-            }
-            else {
-                elem.className = elem.className.replace(/(?:^|\s)marked(?!\S)/, '');
-            }
-    };
+    //            elem.className += " marked";
+    //        }
+    //        else {
+    //            elem.className = elem.className.replace(/(?:^|\s)marked(?!\S)/, '');
+    //        }
+    //};
 
     GetColor = function () {
         return document.getElementById("color-input").value;
