@@ -1,0 +1,18 @@
+c:\users\anna_shiriaeva\documents\visual studio 2013\Projects\Task7\Task7\bin\Task7.dll.config
+c:\users\anna_shiriaeva\documents\visual studio 2013\Projects\Task7\Task7\bin\Task7.dll
+c:\users\anna_shiriaeva\documents\visual studio 2013\Projects\Task7\Task7\bin\Task7.pdb
+c:\users\anna_shiriaeva\documents\visual studio 2013\Projects\Task7\Task7\obj\Debug\Task7.csprojResolveAssemblyReference.cache
+c:\users\anna_shiriaeva\documents\visual studio 2013\Projects\Task7\Task7\obj\Debug\Task7.dll
+c:\users\anna_shiriaeva\documents\visual studio 2013\Projects\Task7\Task7\obj\Debug\Task7.pdb
+C:\Users\Anna_Shiriaeva\Documents\svnRepos\trunc\Task7\Task7\bin\Task7.dll.config
+C:\Users\Anna_Shiriaeva\Documents\svnRepos\trunc\Task7\Task7\bin\Task7.dll
+C:\Users\Anna_Shiriaeva\Documents\svnRepos\trunc\Task7\Task7\bin\Task7.pdb
+C:\Users\Anna_Shiriaeva\Documents\svnRepos\trunc\Task7\Task7\obj\Debug\Task7.csprojResolveAssemblyReference.cache
+C:\Users\Anna_Shiriaeva\Documents\svnRepos\trunc\Task7\Task7\obj\Debug\Task7.dll
+C:\Users\Anna_Shiriaeva\Documents\svnRepos\trunc\Task7\Task7\obj\Debug\Task7.pdb
+C:\Users\User\Desktop\Task7\Task7\bin\Task7.dll.config
+C:\Users\User\Desktop\Task7\Task7\bin\Task7.dll
+C:\Users\User\Desktop\Task7\Task7\bin\Task7.pdb
+C:\Users\User\Desktop\Task7\Task7\obj\Debug\Task7.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\Task7\Task7\obj\Debug\Task7.dll
+C:\Users\User\Desktop\Task7\Task7\obj\Debug\Task7.pdb

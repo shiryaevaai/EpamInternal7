@@ -1,0 +1,1 @@
+﻿MYAPP.controllers.mainController.InitializeIt();

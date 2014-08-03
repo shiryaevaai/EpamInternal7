@@ -1,0 +1,137 @@
+﻿body {
+    position:absolute;
+    overflow:scroll;
+}
+
+.container {
+    position:absolute;
+    width:1000px;
+    height:700px;
+    background-color:antiquewhite;
+}
+
+.left-col {
+    position:absolute;
+    width:200px;
+    height:700px;
+    background-color:aquamarine;
+    left:10px;
+}
+
+.right-col {
+    position:absolute;
+    width:750px;
+    height:700px;
+    background-color:aquamarine;
+    right:10px;
+}
+
+.select-figure {
+    position:absolute;
+    width:190px;
+    height:300px;
+    background-color:white;
+    left:5px;
+    top:5px;
+}
+
+ul {
+     list-style-position: inside;     
+     margin: 0; /* Отступ слева */    
+     position: absolute;
+     width:140px;
+     height:200px;
+     overflow:scroll;
+     border:double;
+}
+
+.select-color {
+    position:absolute;
+    width:190px;
+    height:50px;
+    background-color:white;
+    left:5px;
+    top:330px;
+}
+
+.draw {
+    position:absolute;
+    width:190px;
+    height:50px;
+    background-color:white;
+    left:5px;
+    top:400px;
+}
+
+.delete-figure {
+    position:absolute;
+    width:190px;
+    height:50px;
+    background-color:white;
+    left:5px;
+    top:460px;
+}
+
+.painting-area {
+    position:absolute;
+    width:730px;
+    height:400px;
+    background-color:aqua;
+    right:10px;
+    left:10px;
+    top:10px;
+}
+
+canvas {
+    position:absolute;
+    width:720px;
+    height:390px;
+    background-color:white;
+    right:5px;
+    left:5px;
+    top:5px;
+}
+
+.options-area {
+    position:absolute;
+    width:730px;
+    height:50px;
+    background-color:white;
+    right:10px;
+    left:10px;
+    top:460px;
+}
+
+.option-button {    
+    position:absolute;
+    display: block;
+    top:12px;
+    left:10px;
+}
+
+.load-button {
+    left: 150px;
+}
+
+.json-area {
+    position:absolute;
+    width:730px;
+    height:150px;
+    background-color:white;
+    right:10px;
+    left:10px;
+    top:520px;
+    /*overflow:scroll;*/
+}
+
+.json-area > textarea {
+    color: black;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+}
+
+.marked {
+background-color: #f57a64;
+}
+

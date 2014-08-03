@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        
+    <link href="StyleSheetToTask7.css" rel="stylesheet" />
+
+    <title>Task 7 - JavaScript Fundamentals</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-col">
+            <div class="select-figure">
+                <label for="figure-type">Select type of figure:</label>
+                <ul id="figure-type">
+                    <!--<li onclick="MYAPP.controllers.mainController.Mark(this)">Line</li>
+                    <li onclick="MYAPP.controllers.mainController.Mark(this)">Ellipse</li>
+                    <li onclick="MYAPP.controllers.mainController.Mark(this)">Rectangle</li>-->
+
+                    <li onclick="Mark(this)">Line</li>
+                    <li onclick="Mark(this)">Ellipse</li>
+                    <li onclick="Mark(this)">Rectangle</li>
+                </ul>
+            </div>
+
+            <div class="select-color">
+                <label for="color-input">Select color:</label>
+                <input id="color-input" type="text" />
+            </div>
+
+            <div class="recolor draw">
+                <button name="recolor-button" class="option-button recolor-button" onclick="RecolorSelectedFigure()">Recolor</button>
+            </div>
+
+            <div class="delete-figure">
+                <button name="delete-button" class="option-button delete-button" onclick="DeleteSelectedFigure()">Delete</button>
+            </div>
+        </div>
+
+        <div class="right-col">
+            <div class="painting-area">
+                <canvas id="canvas"></canvas>
+            </div>
+
+            <div class="options-area">
+                <button name="save" class="option-button save-button" onclick="SaveToJson()">Save to Json</button>
+                <button name="load" class="option-button load-button" onclick="LoadFromJson()">Load from Json</button>
+            </div>
+
+            <div id="json-area" class="json-area">
+                <textarea></textarea>
+            </div>
+        </div>
+
+
+    </div>
+    <script src="Scripts/jquery-2.1.1.min.js"></script>
+
+    <script src="JavaScript2.js"></script>
+    <!--<script src="myapp.js"></script>
+
+    <script src="Controllers/main_controller.js"></script>
+    <script src="Controllers/rectangle_controller.js"></script>    
+
+    <script src="Models/shape.js"></script>
+    <script src="Models/rectangle.js"></script>    
+
+    <script src="Views/rectangle_view.js"></script>
+
+    <script src="start.js"></script>-->
+
+</body>
+</html>
