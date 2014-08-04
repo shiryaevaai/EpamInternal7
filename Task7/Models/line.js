@@ -24,7 +24,15 @@
 
     Line.prototype.containsPoint = function (x, y) {
         var k = (this.y2 - this.y1) / (this.x2 - this.x1),
-            b = this.y1 - this.x1 * k;
+            b = this.y1 - this.x1 * k,
+            centerX = this.x1 + (this.x2 - this.x1) / 2,
+            centerY = this.y1 + (this.y2 - this.y1) / 2,           
+            x0 = x - centerX,
+            y0 = y - centerY;
+
+            x = x0 * Math.cos(MYAPP.utils.angleToRadian.angleToRadian(this.rotateAngle)) + y0 * Math.sin(MYAPP.utils.angleToRadian.angleToRadian(this.rotateAngle)) + centerX,
+            y = -x0 * Math.sin(MYAPP.utils.angleToRadian.angleToRadian(this.rotateAngle)) + y0 * Math.cos(MYAPP.utils.angleToRadian.angleToRadian(this.rotateAngle)) + centerY;
+
 
         if (!isFinite(k) && x >= this.x1 - 2 && x <= this.x1 + 2) {
             if (this.y1 <= this.y2) {

@@ -30,8 +30,8 @@
          x0 = x - centerX,
          y0 = y - centerY;
 
-        x = x0 * Math.cos(MYAPP.utils.angleToRadian.angleToRadian(this.rotateAngle)) - y0 * Math.sin(MYAPP.utils.angleToRadian.angleToRadian(this.rotateAngle)) + centerX,
-        y = x0 * Math.sin(MYAPP.utils.angleToRadian.angleToRadian(this.rotateAngle)) + y0 * Math.cos(MYAPP.utils.angleToRadian.angleToRadian(this.rotateAngle)) + centerY;
+        x = x0 * Math.cos(MYAPP.utils.angleToRadian.angleToRadian(this.rotateAngle)) + y0 * Math.sin(MYAPP.utils.angleToRadian.angleToRadian(this.rotateAngle)) + centerX,
+        y = -x0 * Math.sin(MYAPP.utils.angleToRadian.angleToRadian(this.rotateAngle)) + y0 * Math.cos(MYAPP.utils.angleToRadian.angleToRadian(this.rotateAngle)) + centerY;
 
 
         if (Math.pow(x - centerX, 2) / Math.pow(radiusX, 2) + Math.pow(y - centerY, 2) / Math.pow(radiusY, 2) <= 1) {
