@@ -1,1 +1,1 @@
-﻿MYAPP.controllers.mainController.InitializeIt();
+﻿MYAPP.controllers.mainController.initializeIt();

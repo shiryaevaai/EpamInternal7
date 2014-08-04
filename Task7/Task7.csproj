@@ -58,10 +58,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Controllers\ellipse_controller.js" />
-    <Content Include="Controllers\line_controller.js" />
     <Content Include="Controllers\main_controller.js" />
-    <Content Include="Controllers\rectangle_controller.js" />
     <Content Include="index.html" />
     <Content Include="JavaScript1.js" />
     <Content Include="JavaScript2.js" />
@@ -76,10 +73,9 @@
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="start.js" />
     <Content Include="StyleSheetToTask7.css" />
+    <Content Include="Utils\angleToRadian.js" />
     <Content Include="Utils\guidHelper.js" />
-    <Content Include="Views\ellipse_view.js" />
-    <Content Include="Views\line_view.js" />
-    <Content Include="Views\rectangle_view.js" />
+    <Content Include="Views\main_view.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

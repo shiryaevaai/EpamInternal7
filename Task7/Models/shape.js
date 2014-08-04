@@ -9,6 +9,7 @@
         this.isSelected = false;
         this.isFinished = false;
         this.uniqueNumber;
+        this.rotateAngle = 0;
     }    
 
     Shape.prototype.setUniqueNumber = function () {
@@ -25,6 +26,10 @@
 
     Shape.prototype.resetSelected = function () {
         this.isSelected = false;
+    }
+
+    Shape.prototype.setRotateAngle = function (value) {
+        this.rotateAngle = value;
     }
 
     return {

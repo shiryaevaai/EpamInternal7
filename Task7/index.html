@@ -15,18 +15,9 @@
             <div class="select-figure">
                 <label for="figure-type">Select type of figure:</label>
                 <ul id="figure-type">
-                    <!--<li onclick="MYAPP.controllers.mainController.Mark(this)">Line</li>
-                    <li onclick="MYAPP.controllers.mainController.Mark(this)">Ellipse</li>
-                    <li onclick="MYAPP.controllers.mainController.Mark(this)">Rectangle</li>-->
-
-                    <!--<li onclick="Mark(this)">Line</li>
-                    <li onclick="Mark(this)">Ellipse</li>
-                    <li onclick="Mark(this)">Rectangle</li>-->
-
                     <li class="figure-type">Line</li>
                     <li class="figure-type">Ellipse</li>
                     <li class="figure-type">Rectangle</li>
-
                 </ul>
             </div>
 
@@ -38,10 +29,6 @@
             <div class="recolor draw">
                 <button id="recolor-button" name="recolor-button" class="option-button recolor-button">Recolor</button>
             </div>
-
-            <!--<div class="delete-figure">
-                <button name="delete-button" class="option-button delete-button" onclick="DeleteSelectedFigure()">Delete</button>
-            </div>-->
         </div>
 
         <div class="right-col">
@@ -49,9 +36,13 @@
                 <canvas id="canvas"></canvas>
             </div>
 
+            <div class="rotation">
+                <input type="range" min="-180" max="180" step="1" value="0" id="angle" />
+            </div>
+
             <div class="options-area">
-                <button name="save" class="option-button save-button" onclick="SaveToJson()">Save to Json</button>
-                <button name="load" class="option-button load-button" onclick="LoadFromJson()">Load from Json</button>
+                <button id="saveToJson" name="save" class="option-button save-button">Save to Json</button>
+                <button id="loadFromJson" name="load" class="option-button load-button">Load from Json</button>
             </div>
 
             <div id="json-area" class="json-area">
@@ -63,25 +54,19 @@
     </div>
     <script src="Scripts/jquery-2.1.1.min.js"></script>
 
-    <!--<script src="JavaScript2.js"></script>-->
-
     <script src="myapp.js"></script>
 
     <script src="Controllers/main_controller.js"></script>
-    <script src="Controllers/rectangle_controller.js"></script>
-    <script src="Controllers/ellipse_controller.js"></script>
-    <script src="Controllers/line_controller.js"></script>
 
     <script src="Models/shape.js"></script>
     <script src="Models/rectangle.js"></script>
     <script src="Models/ellipse.js"></script>
     <script src="Models/line.js"></script>
 
-    <script src="Views/rectangle_view.js"></script>
-    <script src="Views/ellipse_view.js"></script>
-    <script src="Views/line_view.js"></script>
+    <script src="Views/main_view.js"></script>
 
     <script src="Utils/guidHelper.js"></script>
+    <script src="Utils/angleToRadian.js"></script>
 
     <script src="start.js"></script>
 

@@ -5,31 +5,31 @@
 
 .container {
     position:absolute;
-    width:1000px;
-    height:700px;
+    width: 2000px;
+    height: 1200px;
     background-color:antiquewhite;
 }
 
 .left-col {
     position:absolute;
-    width:200px;
-    height:700px;
-    background-color:aquamarine;
+    width: 400px;
+    height: 1200px;
+    background-color:#0094ff;
     left:10px;
 }
 
 .right-col {
     position:absolute;
-    width:750px;
-    height:700px;
-    background-color:aquamarine;
+    width: 1550px;
+    height: 1200px;
+    background-color:#0094ff;
     right:10px;
 }
 
 .select-figure {
     position:absolute;
-    width:190px;
-    height:300px;
+    width: 390px;
+    height: 500px;
     background-color:white;
     left:5px;
     top:5px;
@@ -37,70 +37,87 @@
 
 ul {
      list-style-position: inside;     
-     margin: 0; /* Отступ слева */    
+     margin: 0;  
      position: absolute;
-     width:140px;
-     height:200px;
+     width: 340px;
+     height: 470px;
      overflow:scroll;
      border:double;
 }
 
 .select-color {
-    position:absolute;
-    width:190px;
-    height:50px;
-    background-color:white;
-    left:5px;
-    top:330px;
+    position: absolute;
+    width: 390px;
+    height: 50px;
+    background-color: white;
+    left: 5px;
+    top: 530px;
+}
+
+.select-color > label {
+    margin: 15px;
+    position: absolute;
+}
+
+.select-color > input {
+    margin: 15px 90px;
+    position: absolute;
 }
 
 .draw {
-    position:absolute;
-    width:190px;
-    height:50px;
-    background-color:white;
-    left:5px;
-    top:400px;
-}
-
-.delete-figure {
-    position:absolute;
-    width:190px;
-    height:50px;
-    background-color:white;
-    left:5px;
-    top:460px;
+    position: absolute;
+    width: 390px;
+    height: 50px;
+    background-color: white;
+    left: 5px;
+    top: 600px;
 }
 
 .painting-area {
-    position:absolute;
-    width:730px;
-    height:400px;
-    background-color:aqua;
-    right:10px;
-    left:10px;
-    top:10px;
+    position: absolute;
+    width: 1530px;
+    height: 500px;
+    background-color: #0094ff;
+    right: 10px;
+    left: 10px;
+    top: 10px;
 }
 
 canvas {
     position:absolute;
-    width:720px;
-    height:390px;
+    width: 1520px;
+    height: 490px;
     background-color:white;
     right:5px;
     left:5px;
     top:5px;
 }
 
-.options-area {
-    position:absolute;
-    width:730px;
-    height:50px;
-    background-color:white;
-    right:10px;
-    left:10px;
-    top:460px;
+.rotation {
+     position: absolute;
+    width: 730px;
+    height: 50px;
+    background-color: white;
+    right: 10px;
+    left: 10px;
+    top: 530px;
 }
+
+.rotation > input {
+    margin: 15px;
+    width:700px;
+    position: absolute;
+}
+
+.options-area {
+    position: absolute;
+    width: 730px;
+    height: 50px;
+    background-color: white;
+    right: 10px;
+    left: 10px;
+    top: 600px;
+    }
 
 .option-button {    
     position:absolute;
@@ -114,24 +131,23 @@ canvas {
 }
 
 .json-area {
-    position:absolute;
-    width:730px;
-    height:150px;
-    background-color:white;
-    right:10px;
-    left:10px;
-    top:520px;
-    /*overflow:scroll;*/
+    position: absolute;
+    width: 1530px;
+    height: 500px;
+    background-color: white;
+    right: 10px;
+    left: 10px;
+    top: 660px;    
 }
 
 .json-area > textarea {
-    color: black;
+    color: #0094ff;
     width: 100%;
     height: 100%;
     overflow: scroll;
 }
 
 .marked {
-background-color: #f57a64;
+background-color: #ff0000;
 }
 

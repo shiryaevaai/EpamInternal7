@@ -1,11 +1,8 @@
 ﻿MYAPP.controllers.mainController = (function () {
-    var Mark,
-        RecolorSelectedFigure,
-        GetColor,
-        ClearCanvas,
-        SaveToJson,
-        LoadFromJson,
-        InitializeIt,
+    var getColor,
+        saveToJson,
+        loadFromJson,
+        initializeIt,
         selectedToEdit = -1,
         selectedFigureIndex = -1,
         _shape,
@@ -13,55 +10,26 @@
         _line,
         _ellipse,
         _mainController,
-        _rectangleController,
-        _ellipseController,
-        _lineController,
         _mainView,
-        _rectangleView,
-        _lineView,
-        _ellipseView;
+        _angleToRadian;
 
-    InitializeIt = function () {
+    initializeIt = function () {
         $(document).ready(function () {
-            canvas = document.getElementById('canvas');
-            context = document.getElementById('canvas').getContext('2d');
-            canvasCoordinates = canvas.getBoundingClientRect();
-            canvas.width = 720;
-            canvas.height = 390,
+            canvas = document.getElementById('canvas'),
+            context = document.getElementById('canvas').getContext('2d'),
+            canvasCoordinates = canvas.getBoundingClientRect(),
+            canvas.width = 1520,
+            canvas.height = 490,            
             _shape = MYAPP.models.shape,
             _rectangle = MYAPP.models.rectangle,
             _line = MYAPP.models.line,
             _ellipse = MYAPP.models.ellipse,
-            _mainController = MYAPP.controllers.mainController,
-            _rectangleController = MYAPP.controllers.rectangleController,
-            _ellipseController = MYAPP.controllers.ellipseController,
-            _lineController = MYAPP.controllers.lineController,
+            _mainController = MYAPP.controllers.mainController,        
             _mainView = MYAPP.views.mainView,
-            _rectangleView = MYAPP.views.rectangleView,
-            _lineView = MYAPP.views.lineView,
-            _ellipseView = MYAPP.views.ellipseView;                     
-
-            function Draw() {    //view
-                ClearCanvas();
-                a.forEach(function (item, index) {
-
-                    switch (item.Type) {
-                        case "Rectangle":
-                            _rectangleView.draw(item);
-                            break;
-                        case "Ellipse":
-                            _ellipseView.draw(item);
-                            break;                            
-                        case "Line":
-                            _lineView.draw(item);
-                            break;
-                        default:
-                            break;
-                    }                    
-                });
-            };
-
-            setInterval(Draw, 100);
+            _angleToRadian=MYAPP.utils.angleToRadian;
+              
+            _mainView.draw();
+            setInterval(_mainView.draw, 100);
 
             canvas.addEventListener("mousedown", function (e) {
                 initialX = e.pageX - canvasCoordinates.left,
@@ -69,91 +37,47 @@
 
                 try {
                     figureType = $('#figure-type > .marked')[0].innerHTML;
-                    selectedToEdit = a.length;
-                    selectedFigureIndex = a.length;
+                    selectedToEdit = figureArray.length;
+                    selectedFigureIndex = figureArray.length;
 
-                    a.forEach(function (item, index) {
+                    figureArray.forEach(function (item, index) {
                         item.resetSelected();
                     });
 
                     switch (figureType) {
                         case "Rectangle":
-                            var figure = new _rectangle.Rectangle(initialX, initialY, initialX, initialY, GetColor());
+                            var figure = new _rectangle.Rectangle(initialX, initialY, initialX, initialY, getColor());
                             figure.setUniqueNumber();                            
-                            a.push(figure);
+                            figureArray.push(figure);
                             break;
                         case "Ellipse":
-                            var figure = new _ellipse.Ellipse(initialX, initialY, initialX, initialY, GetColor());
-                            a.push(figure);
+                            var figure = new _ellipse.Ellipse(initialX, initialY, initialX, initialY, getColor());
                             figure.setUniqueNumber();
+                            figureArray.push(figure);
                             break;
                         case "Line":
-                            var figure = new _line.Line(initialX, initialY, initialX, initialY, GetColor());
-                            a.push(figure);
+                            var figure = new _line.Line(initialX, initialY, initialX, initialY, getColor());
+                            figure.setUniqueNumber();
+                            figureArray.push(figure);
                         default:
                             break;                            
                     }
                 }
                 catch (ex) {               
                     selectedToEdit = -1;
-                    selectedFigureIndex = -1;
+                    selectedFigureIndex = -1;  
 
-                    for (var selectionIndex = a.length - 1; selectionIndex >= 0; selectionIndex--) {                       
-                        switch (a[selectionIndex].Type) {
-                            case "Rectangle":
-                                //alert(_rectangleController.containsPoint());
-                                if (_rectangleController.containsPoint(a[selectionIndex], initialX, initialY)) {
-                                    a[selectionIndex].setSelected();
-                                    selectedFigureIndex = selectionIndex;
-                                    selectedToEdit = selectionIndex;
-                                    break;
-                                }
-                                else {
-                                    a[selectionIndex].resetSelected();
-                                }
-                                break;
-
-                            case "Ellipse":
-                                if (_ellipseController.containsPoint(a[selectionIndex], initialX, initialY)) {
-                                    a[selectionIndex].setSelected();
-                                    selectedFigureIndex = selectionIndex;
-                                    selectedToEdit = selectionIndex;
-                                    break;
-                                }
-                                else {
-                                    a[selectionIndex].resetSelected();
-                                }
-                                break;
-
-                            case "Line":
-                                if (_lineController.containsPoint(a[selectionIndex], initialX, initialY)) {
-                                    a[selectionIndex].setSelected();
-                                    selectedFigureIndex = selectionIndex;
-                                    selectedToEdit = selectionIndex;
-                                    break;
-                                }
-                                else {
-                                    a[selectionIndex].resetSelected();
-                                }
-                                break;
-
-                            default:
-                                break;                               
+                    for (var selectionIndex = figureArray.length - 1; selectionIndex >= 0; selectionIndex--) {
+                        if (figureArray[selectionIndex].containsPoint(initialX, initialY)) {
+                            figureArray[selectionIndex].setSelected();
+                            selectedFigureIndex = selectionIndex;
+                            selectedToEdit = selectionIndex;
+                            document.getElementById("color-input").value = figureArray[selectionIndex].color;
+                        }
+                        else {
+                            figureArray[selectionIndex].resetSelected();
                         }
                     }
-
-
-                    //for (var selectionIndex = a.length - 1; selectionIndex >= 0; selectionIndex--) {
-                    //    if (a[selectionIndex].containsPoint(initialX, initialY)) {
-                    //        a[selectionIndex].setSelected();
-                    //        selectedFigureIndex = selectionIndex;
-                    //        selectedToEdit = selectionIndex;
-                    //        break;
-                    //    }
-                    //    else {
-                    //        a[selectionIndex].resetSelected();
-                    //    }
-                    //}
                 }
             });
 
@@ -163,12 +87,12 @@
                     y = e.pageY - canvasCoordinates.top;
 
                 if (figureType) {
-                    var figure = a[a.length - 1];
+                    var figure = figureArray[figureArray.length - 1];
                     figure.x2 = x;
                     figure.y2 = y;
                 }
                 else if (selectedFigureIndex > -1) {
-                    var figure = a[selectedFigureIndex];
+                    var figure = figureArray[selectedFigureIndex];
 
                     figure.x1 = figure.x1 + (x - initialX),
                     figure.x2 = figure.x2 + (x - initialX),
@@ -180,9 +104,8 @@
             });
 
             canvas.addEventListener("mouseup", function (e) {
-                if (figureType) {
-                   // var figure = a[a.length - 1];
-                    selectedToEdit = a.length - 1;
+                if (figureType) {                  
+                    selectedToEdit = figureArray.length - 1;
                     selectedFigureIndex = - 1;
                     figureType = undefined;
                 }
@@ -190,179 +113,109 @@
                     selectedFigureIndex = -1;
                 }
             });
-
-
-            //function RecolorSelectedFigure() {
-            //    if (selectedToEdit > -1) {
-            //        var recoloredFigure = a[selectedToEdit];
-            //        recoloredFigure.color = GetColor();
-            //    }
-            //}
-
-            //function DeleteSelectedFigure() {
-            //    if (selectedToEdit > -1) {
-
-            //        if (selectedToEdit < a.length - 1) {
-            //            for (var k = selectedToEdit; k < a.length - 1; k++) {
-            //                a[k] = a[k + 1];
-            //            }
-            //        }
-
-            //        a.length--;
-            //    }
-            //}
-
+                       
             $(document).keyup(function (eventObject) {
                 if (eventObject.which == 46) {
                     if (selectedToEdit > -1) {
 
-                        if (selectedToEdit < a.length - 1) {
-                            for (var k = selectedToEdit; k < a.length - 1; k++) {
-                                a[k] = a[k + 1];
+                        if (selectedToEdit < figureArray.length - 1) {
+                            for (var k = selectedToEdit; k < figureArray.length - 1; k++) {
+                                figureArray[k] = figureArray[k + 1];
                             }
                         }
 
-                        a.length--;
+                        figureArray.length--;
                         selectedFigureIndex = -1;
                         selectedToEdit = -1;
                     }
                 }
             });
-            
-            document.getElementById('recolor-button').onclick = function () {                    
-                if (selectedToEdit > -1) {
-                    var recoloredFigure = a[selectedToEdit];
-                    recoloredFigure.color = GetColor();
-                }
-            }
-          
-            canvas.addEventListener(document.getElementsByClassName('figure-type').onclick, function (event) {
-                var parent = event.target.parentNode,
-                   elem = event.target,
-                   siblings = parent.children,
-                   sibIndex;
 
+            document.getElementById('saveToJson').onclick = function () {
+                $('#json-area > textarea').prop("value", "");
+                $('#json-area > textarea').prop("value", JSON.stringify(figureArray));
+            };
+
+            document.getElementById('loadFromJson').onclick = function () {
+                var temporaryArr = JSON.parse($('#json-area > textarea').prop("value"));
+                figureArray = [];
+                selectedFigureIndex = -1;
+                selectedToEdit = -1;
+                temporaryArr.forEach(function (item, index) {
+                    switch (item.Type) {
+                        case "Rectangle":
+                            var figure = new _rectangle.Rectangle(item.x1, item.y1, item.x2, item.y2, item.color);
+                            figure.resetSelected();
+                            figureArray.push(figure);
+                            break;
+                        case "Ellipse":
+                            var figure = new _ellipse.Ellipse(item.x1, item.y1, item.x2, item.y2, item.color);
+                            figure.resetSelected();
+                            figureArray.push(figure);
+                            break;
+                        case "Line":
+                            var figure = new _line.Line(item.x1, item.y1, item.x2, item.y2, item.color);
+                            figure.resetSelected();
+                            figureArray.push(figure);
+                            break;
+                        default:
+                            break;
+                    }
+                });
+            };
+            
+            document.getElementById('recolor-button').onclick = function () {
+                if (selectedToEdit > -1) {
+                    var recoloredFigure = figureArray[selectedToEdit];
+                    recoloredFigure.color = getColor();
+                }
+            };
+                          
+            document.getElementById('figure-type').onclick = function (event) {
+                var parent = event.target.parentNode,
+                    elem = event.target,
+                    siblings = parent.children,
+                    siblingsNumber = siblings.length,
+                    siblingIndex,
+                    markRegex = /(?:^|\s)marked(?!\S)/;
+                               
 
                 if (elem.className == null) {
-                    for (sibIndex = 0; sibIndex < siblings.length; sibIndex++) {
-                        siblings[sibIndex].className = siblings[sibIndex].className.replace(/(?:^|\s)marked(?!\S)/, '');
+                    for (siblingIndex = 0; siblingIndex < siblingsNumber; siblingIndex++) {
+                        siblings[siblingIndex].className = siblings[siblingIndex].className.replace(markRegex, '');
                     }
 
                     elem.className = "marked";
                 }
                 else
                     if (elem.className.indexOf("marked") === -1) {
-                        for (sibIndex = 0; sibIndex < siblings.length; sibIndex++) {
-                            siblings[sibIndex].className = siblings[sibIndex].className.replace(/(?:^|\s)marked(?!\S)/, '');
+                        for (siblingIndex = 0; siblingIndex < siblingsNumber; siblingIndex++) {
+                            siblings[siblingIndex].className = siblings[siblingIndex].className.replace(markRegex, '');
                         }
 
                         elem.className += " marked";
                     }
                     else {
-                        elem.className = elem.className.replace(/(?:^|\s)marked(?!\S)/, '');
+                        elem.className = elem.className.replace(markRegex, '');
                     }
-            });
-
-            //document.getElementsByClassName('figure-type').onclick (function (event) {
-            //    var parent = event.target.parentNode,
-            //        elem = event.target,
-            //        siblings = parent.children,
-            //        sibIndex;
-                               
-
-            //    if (elem.className == null) {
-            //        for (sibIndex = 0; sibIndex < siblings.length; sibIndex++) {
-            //            siblings[sibIndex].className = siblings[sibIndex].className.replace(/(?:^|\s)marked(?!\S)/, '');
-            //        }
-
-            //        elem.className = "marked";
-            //    }
-            //    else
-            //        if (elem.className.indexOf("marked") === -1) {
-            //            for (sibIndex = 0; sibIndex < siblings.length; sibIndex++) {
-            //                siblings[sibIndex].className = siblings[sibIndex].className.replace(/(?:^|\s)marked(?!\S)/, '');
-            //            }
-
-            //            elem.className += " marked";
-            //        }
-            //        else {
-            //            elem.className = elem.className.replace(/(?:^|\s)marked(?!\S)/, '');
-            //        }
-            //});
+            };
 
         })
     };
-
-    //RecolorSelectedFigure = function() {
-    //    if (selectedToEdit > -1) {
-    //        var recoloredFigure = a[selectedToEdit];
-    //        recoloredFigure.color = GetColor();
-    //    }
-    //}
-
-    //Mark = function (elem) {
-    //    var parent = elem.parentNode,
-    //        siblings = parent.children,
-    //        sibIndex;
-
-    //    if (elem.className == null) {
-    //        for (sibIndex = 0; sibIndex < siblings.length; sibIndex++) {
-    //            siblings[sibIndex].className = siblings[sibIndex].className.replace(/(?:^|\s)marked(?!\S)/, '');
-    //        }
-
-    //        elem.className = "marked";
-    //    }
-    //    else
-    //        if (elem.className.indexOf("marked") === -1) {
-    //            for (sibIndex = 0; sibIndex < siblings.length; sibIndex++) {
-    //                siblings[sibIndex].className = siblings[sibIndex].className.replace(/(?:^|\s)marked(?!\S)/, '');
-    //            }
-
-    //            elem.className += " marked";
-    //        }
-    //        else {
-    //            elem.className = elem.className.replace(/(?:^|\s)marked(?!\S)/, '');
-    //        }
-    //};
-
-    GetColor = function () {
+    
+    getColor = function () {
         return document.getElementById("color-input").value;
+    }    
+
+    getAngle = function () {
+        return document.getElementById("angle-input").value;
     }
 
-    ClearCanvas = function () {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-    }
-
-    SaveToJson = function () {
-        $('#json-area > textarea').prop("value", "");
-        $('#json-area > textarea').prop("value", JSON.stringify(a));
-    }
-
-    LoadFromJson = function () {
-        var temporaryArr = JSON.parse($('#json-area > textarea').prop("value"));
-        a = [];
-        temporaryArr.forEach(function (item, index) {
-            switch (item.Type) {
-                case "Rectangle":
-                    var figure = new Rectangle(item.x1, item.y1, item.x2, item.y2, item.color);
-                    figure.setUniqueNumber();
-                    a.push(figure);
-
-                    break;
-                default:
-                    break;
-
-            }
-        });
-    }
-
-    return {
-        Mark: Mark,
-        RecolorSelectedFigure:RecolorSelectedFigure,
-        GetColor: GetColor,
-        ClearCanvas: ClearCanvas,
-        SaveToJson: SaveToJson,
-        LoadFromJson: LoadFromJson,
-        InitializeIt: InitializeIt
+    return {  
+        getColor: getColor,
+        getAngle: getAngle,
+        saveToJson: saveToJson,
+        loadFromJson: loadFromJson,
+        initializeIt: initializeIt
     }
 }());
