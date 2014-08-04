@@ -36,7 +36,7 @@
                 initialY = e.pageY - canvasCoordinates.top;                
 
                 try {
-                    figureType = $('#figure-type > .marked')[0].innerHTML;
+                    figureType = $('#figure-type > .marked')[0].id;
                     selectedToEdit = figureArray.length;
                     selectedFigureIndex = figureArray.length;
 
@@ -45,17 +45,17 @@
                     });
 
                     switch (figureType) {
-                        case "Rectangle":
+                        case "figure-type-Rectangle":
                             var figure = new _rectangle.Rectangle(initialX, initialY, initialX, initialY, getColor());
                             figure.setUniqueNumber();                            
                             figureArray.push(figure);
                             break;
-                        case "Ellipse":
+                        case "figure-type-Ellipse":
                             var figure = new _ellipse.Ellipse(initialX, initialY, initialX, initialY, getColor());
                             figure.setUniqueNumber();
                             figureArray.push(figure);
                             break;
-                        case "Line":
+                        case "figure-type-Line":
                             var figure = new _line.Line(initialX, initialY, initialX, initialY, getColor());
                             figure.setUniqueNumber();
                             figureArray.push(figure);

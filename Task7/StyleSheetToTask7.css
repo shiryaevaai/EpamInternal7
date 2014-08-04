@@ -1,6 +1,7 @@
 ﻿body {
     position:absolute;
     overflow:scroll;
+    
 }
 
 .container {
@@ -35,14 +36,44 @@
     top:5px;
 }
 
-ul {
+.select-figure > label {
+    margin: 15px;
+    position: absolute;
+    
+}
+
+.select-figure > ul {
      list-style-position: inside;     
-     margin: 0;  
+     padding:0;
+     left: 25px;  
+     top: 25px;
      position: absolute;
      width: 340px;
-     height: 470px;
-     overflow:scroll;
-     border:double;
+     height: 470px; 
+
+}
+
+.select-figure > ul > li {
+    padding:0;
+     margin: 0;       
+     width: 340px;
+     height: 140px;
+     border:none;
+     list-style-type:none;
+     border-style:hidden;
+     border-width:3px;      
+}
+
+.select-figure > ul > #figure-type-Line{
+    background-image: url(Content/line.png);
+}
+
+.select-figure > ul > #figure-type-Rectangle{
+    background-image: url(Content/rectangle.png);
+}
+
+.select-figure > ul > #figure-type-Ellipse{
+    background-image: url(Content/ellipse.png);
 }
 
 .select-color {
@@ -60,7 +91,7 @@ ul {
 }
 
 .select-color > input {
-    margin: 15px 90px;
+    margin: 15px 110px;
     position: absolute;
 }
 
@@ -147,7 +178,8 @@ canvas {
     overflow: scroll;
 }
 
-.marked {
-background-color: #ff0000;
+.marked {  
+    border-style:solid !important;    
+    border-color: #0094ff !important;
 }
 
